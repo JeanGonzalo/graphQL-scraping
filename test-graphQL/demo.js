@@ -1,8 +1,9 @@
 //const gql = require('graphql-tag')
 const { ApolloServer, gql } = require('apollo-server')
-const fs = require('fs')
-import scraping from './scraping-linkedin'
-console.log('estamos en scraping', scraping)
+//const fs = require('fs');
+const scraping = require('./scraping-linkedin');
+//import scraping from './scraping-linkedin'
+//console.log('estamos en scraping', scraping)
 let scrap = []
 
 /* 
@@ -40,21 +41,27 @@ const resolvers = {
 class init {
 
     constructor() {
+
+        this.server
         this.loadData()
     }
 
     async loadData() {
         scrap = await scraping();
         //console.log(`estamos en scrap ${scrap}`)
-        const server = await new ApolloServer({
+        this.serv()
+        this.start()
+
+    }
+    serv() {
+        this.server = new ApolloServer({
             typeDefs,
             resolvers
         })
-        await server.listen(4000, () => {/* 
-            const contatcs = await require('./scraping-linkedin')
-            console.log(`estamos en escraping Contacts ${console.log(contatcs)}`) */
-            console.log('estamos en el puerto 4000')
-        })
+    }
+
+    start() {
+        this.server.listen().then(({ url }) => console.log(`VAS A CAER GAAA ${url}`))
     }
 }
 

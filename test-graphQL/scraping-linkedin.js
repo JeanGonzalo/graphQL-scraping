@@ -36,17 +36,17 @@ async function scraping() {
     );
 
 
-    console.log(data);
-    let convert = JSON.stringify(data);
-    fs.writeFile('scrapingContacts.txt', convert, function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
+    // console.log(data);
+    // let convert = JSON.stringify(data);
+    // fs.writeFile('scrapingContacts.txt', convert, function (err) {
+    //     if (err) throw err;
+    //     console.log('Saved!');
+    // });
     //await browser.close();
 
-    console.log(convert)
+    //console.log(convert)
     return data;
 
 };
 
-export default scraping
+module.exports = scraping
